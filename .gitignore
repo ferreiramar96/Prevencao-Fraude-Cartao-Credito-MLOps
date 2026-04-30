@@ -1,0 +1,94 @@
+# =====================
+# Python
+# =====================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+*.egg
+dist/
+build/
+.eggs/
+
+# =====================
+# Ambientes virtuais
+# =====================
+venv/
+.venv/
+env/
+ENV/
+
+# =====================
+# IDEs e editores
+# =====================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# =====================
+# Variáveis de ambiente
+# =====================
+.env
+.env.local
+.env.production
+
+# =====================
+# Jupyter Notebooks
+# =====================
+.ipynb_checkpoints/
+
+# =====================
+# MLflow
+# =====================
+mlruns/
+mlartifacts/
+
+# =====================
+# Dados (não versionar arquivos grandes)
+# =====================
+data/raw/*.csv
+data/raw/*.parquet
+data/raw/*.xlsx
+data/processed/*.csv
+data/processed/*.parquet
+data/processed/*.pkl
+
+# =====================
+# Modelos serializados
+# =====================
+*.pkl
+*.joblib
+*.h5
+*.onnx
+models/
+
+# =====================
+# DVC (se usar)
+# =====================
+*.dvc
+.dvc/tmp/
+.dvc/cache/
+
+# =====================
+# Docker
+# =====================
+*.log
+docker-compose.override.yml
+
+# =====================
+# Testes e cobertura
+# =====================
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# =====================
+# Outros
+# =====================
+*.tar.gz
+*.zip
