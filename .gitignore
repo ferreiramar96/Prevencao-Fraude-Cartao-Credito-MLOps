@@ -92,3 +92,5 @@ coverage.xml
 # =====================
 *.tar.gz
 *.zip
+
+mlflow.db
