@@ -46,6 +46,7 @@ ENV/
 # =====================
 mlruns/
 mlartifacts/
+mlflow.db
 
 # =====================
 # Dados (não versionar arquivos grandes)
@@ -92,5 +93,3 @@ coverage.xml
 # =====================
 *.tar.gz
 *.zip
-
-mlflow.db
