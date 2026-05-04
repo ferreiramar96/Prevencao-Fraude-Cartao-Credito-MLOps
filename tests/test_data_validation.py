@@ -1,8 +1,10 @@
+import os
 from src.data_processing import load_data
 
+FIXTURE_PATH = os.path.join(os.path.dirname(__file__), "fixtures", "sample_creditcard.csv")
+
 def test_columns_exist():
-    url_dados = "https://www.dropbox.com/s/b44o3t3ehmnx2b7/creditcard.csv?dl=1"
-    df = load_data(url_dados)
+    df = load_data(FIXTURE_PATH)
 
     expected = ["Time", "Amount", "Class"]
 
