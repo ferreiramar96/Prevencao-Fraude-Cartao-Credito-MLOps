@@ -20,9 +20,9 @@ logging.getLogger("mlflow.models.model").setLevel(logging.ERROR)
 url_mlflow = os.getenv("URL_MLFLOW")
 if not url_mlflow:
     raise RuntimeError("URL_MLFLOW não definida")
-    
+
 mlflow.set_tracking_uri(url_mlflow)
-mlflow.set_experiment("fraude-cartao-credito")
+mlflow.set_experiment("prevencao-fraude-cartao-credito")
 
 models_config = {
     "LogisticRegression": {
