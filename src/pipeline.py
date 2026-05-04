@@ -8,8 +8,20 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from mlflow.tracking import MlflowClient
 import mlflow
+import logging
+import os
 
-mlflow.set_tracking_uri("http://127.0.0.1:5001")
+# Suprir warnings internos do MLflow que não são acionáveis
+logging.getLogger("mlflow.sklearn").setLevel(logging.ERROR)
+logging.getLogger("mlflow.utils.environment").setLevel(logging.ERROR)
+logging.getLogger("mlflow.utils.requirements_utils").setLevel(logging.ERROR)
+logging.getLogger("mlflow.models.model").setLevel(logging.ERROR)
+
+url_mlflow = os.getenv("URL_MLFLOW")
+if not url_mlflow:
+    raise RuntimeError("URL_MLFLOW não definida")
+    
+mlflow.set_tracking_uri(url_mlflow)
 mlflow.set_experiment("fraude-cartao-credito")
 
 models_config = {
@@ -95,7 +107,7 @@ def run_training_pipeline():
 
             mlflow.log_metrics(metrics)
             mlflow.log_params(config['params'])
-            mlflow.sklearn.log_model(trained_model, 'model')
+            mlflow.sklearn.log_model(trained_model, name='model')
             mlflow.log_artifacts("data/processed", artifact_path="processed_data")
 
             run_id = mlflow.active_run().info.run_id
