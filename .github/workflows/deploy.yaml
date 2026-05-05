@@ -1,0 +1,59 @@
+name: Deploy to Cloud Run
+
+on:
+  workflow_run:
+    workflows: ["Train and Log Models"]
+    types:
+      - completed
+
+env:
+  PROJECT_ID: ${{ secrets.PROJECT_ID }}
+  SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
+  RUN_REGION: southamerica-east1
+
+jobs:
+
+  Deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    # Authentication
+    - id: 'auth'
+      name: 'Authenticate to Google Cloud'
+      uses: 'google-github-actions/auth@v2'
+      with:
+        credentials_json: '${{ secrets.GCP_SERVICE_ACCOUNT }}'
+
+    # Setup gcloud CLI
+    - name: 'Set up Cloud SDK'
+      uses: 'google-github-actions/setup-gcloud@v2'
+      with:
+        project_id: ${{ secrets.PROJECT_ID }}
+
+    - name: 'Authorize Docker'
+      run: gcloud auth configure-docker southamerica-east1-docker.pkg.dev
+
+    # Build and push image to Registry Artifacts
+    - name: Build and Push
+      run: |-
+        IMAGE_TAG="southamerica-east1-docker.pkg.dev/$PROJECT_ID/$SERVICE_NAME/ml-api-fraude:$GITHUB_SHA"
+        docker build \
+          -t "$IMAGE_TAG" .
+        docker push "$IMAGE_TAG"
+
+    # Deploy image to Cloud Run
+    - name: Deploy
+      run: |-
+        IMAGE_TAG="southamerica-east1-docker.pkg.dev/$PROJECT_ID/$SERVICE_NAME/ml-api-fraude:$GITHUB_SHA"
+        gcloud run deploy "$SERVICE_NAME" \
+          --quiet \
+          --region "$RUN_REGION" \
+          --image "$IMAGE_TAG" \
+          --platform "managed" \
+          --allow-unauthenticated \
+          --port 8080
