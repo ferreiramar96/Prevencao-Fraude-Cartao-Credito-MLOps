@@ -12,9 +12,36 @@ O dataset utilizado é o clássico [Credit Card Fraud Detection](https://www.kag
 
 ---
 
+## 🎯 Problema & Solução
+
+### O Problema
+
+Fraudes em cartões de crédito representam um prejuízo de **bilhões de dólares por ano** para instituições financeiras e consumidores ao redor do mundo. Para as empresas, o impacto vai além do financeiro:
+
+- **Prejuízo direto**: cada transação fraudulenta não detectada gera chargeback, reembolso ao cliente e absorção do custo pela instituição.
+- **Perda de confiança**: falsos negativos (fraudes não detectadas) comprometem a segurança percebida pelo cliente e podem levar ao abandono do produto.
+- **Fricção desnecessária**: falsos positivos (transações legítimas bloqueadas) frustram clientes e geram custos operacionais com atendimento.
+- **Velocidade de resposta**: fraudes acontecem em segundos. Uma solução que demora horas para ser atualizada ou que exige intervenção manual para ser redeploya-da não acompanha o ritmo do problema.
+
+O desafio central é **detectar o máximo de fraudes possível sem prejudicar a experiência de clientes legítimos** — e fazer isso de forma confiável, escalável e continuamente atualizada.
+
+---
+
+### A Solução
+
+Este projeto propõe uma solução de ponta a ponta que endereça tanto a **detecção** quanto a **operação contínua** do sistema:
+
+- **Detecção inteligente**: modelos treinados para priorizar a identificação de fraudes, minimizando tanto as fraudes que passam despercebidas quanto os bloqueios indevidos de clientes legítimos.
+- **Comparação sistemática de modelos**: múltiplos algoritmos são treinados, avaliados e comparados automaticamente a cada ciclo — garantindo que o modelo em produção seja sempre o mais eficaz disponível.
+- **Atualização sem interrupção**: o pipeline de CI/CD garante que um novo modelo, assim que validado, seja colocado em produção automaticamente — sem parada de serviço e sem intervenção manual.
+- **Rastreabilidade total**: cada decisão do modelo é ligada a um experimento registrado, com métricas e parâmetros versionados, garantindo auditoria e conformidade.
+- **API pronta para integração**: a predição é exposta via API REST, podendo ser consumida em tempo real por qualquer sistema da instituição — aplicativo, gateway de pagamento ou plataforma antifraude.
+
+---
+
 ## 🏗️ Pipeline
 
-<!-- Adicionar imagem do pipeline aqui -->
+![Pipeline do Projeto](img/pipeline.png)
 
 ---
 

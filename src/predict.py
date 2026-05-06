@@ -5,7 +5,6 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-# Carrega o .env a partir do diretório onde este arquivo está (src/)
 load_dotenv(Path(__file__).parent / ".env")
 
 url_mlflow = os.getenv("URL_MLFLOW")
@@ -45,7 +44,6 @@ def get_best_model():
                 "metric": metric_value
             })
 
-    # pega o melhor
     if not candidatos:
         print("❌ Nenhum modelo com métrica válida encontrado")
         return None

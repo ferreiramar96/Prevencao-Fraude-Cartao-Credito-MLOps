@@ -1,5 +1,4 @@
 from src.data_processing import load_data, split_train_validation, get_preprocessor
-from src.model_training import train_model
 from src.model_evaluation import evaluate_model
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier

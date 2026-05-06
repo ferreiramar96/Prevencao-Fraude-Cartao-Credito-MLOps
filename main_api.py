@@ -27,12 +27,10 @@ async def predict(dados: dict):
     if not model_data:
         return {"error": "Modelo não carregado"}
 
-    # Criamos o DataFrame com as colunas originais
     df = pd.DataFrame([dados])
 
     pipeline = model_data["model"]
     
-    # O predict roda o pré-processamento automaticamente!
     prediction = pipeline.predict(df)
     proba = pipeline.predict_proba(df)
 
